@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        app:startDestination="@id/LoginFragment">
+
+    <fragment android:id="@+id/LoginFragment"
+            android:name="com.z100.valentuesday.ui.fragment.LoginFragment"
+            android:label="@string/login_fragment_label"
+            tools:layout="@layout/fragment_login">
+
+        <action android:id="@+id/action_login_to_dashboard"
+                app:destination="@id/DashboardFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/DashboardFragment"
+            android:name="com.z100.valentuesday.ui.fragment.DashboardFragment"
+            android:label="@string/dashboard_fragment_label"
+            tools:layout="@layout/fragment_dashboard">
+
+        <action android:id="@+id/action_dashboard_to_login"
+                app:destination="@id/LoginFragment" />
+
+        <action android:id="@+id/action_dashboard_to_question"
+                app:destination="@id/QuestionFragment" />
+
+        <action android:id="@+id/action_dashboard_to_question_list"
+                app:destination="@id/QuestionListFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/QuestionFragment"
+            android:name="com.z100.valentuesday.ui.fragment.QuestionFragment"
+            android:label="@string/question_fragment_label"
+            tools:layout="@layout/fragment_question">
+
+        <action android:id="@+id/action_question_to_dashboard"
+                app:destination="@id/DashboardFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/QuestionListFragment"
+            android:name="com.z100.valentuesday.ui.fragment.QuestionListFragment"
+            android:label="@string/question_list_fragment_label"
+            tools:layout="@layout/fragment_question_list">
+
+        <action android:id="@+id/action_question_list_to_dashboard"
+                app:destination="@id/DashboardFragment" />
+    </fragment>
+</navigation>

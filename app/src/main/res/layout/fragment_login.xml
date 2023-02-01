@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.LoginFragment">
+
+    <!-- Text area -->
+    <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical">
+
+            <TextView android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_title"
+                    android:text="Valentuesday" />
+
+            <TextView android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_desc"
+                    android:text="Description of Valentuesday" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Input area -->
+    <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+        <EditText android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/input_background_neutral"
+                android:id="@+id/et_activation_key"
+                android:inputType="textPersonName"
+                android:text="Activation key"
+                android:ems="10"
+                tools:ignore="NestedWeights" />
+
+        <Button android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/btn_proceed"
+                android:text="Proceed" />
+
+        <!-- Filler -->
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                tools:ignore="UselessLeaf" />
+
+    </LinearLayout>
+
+</LinearLayout>
