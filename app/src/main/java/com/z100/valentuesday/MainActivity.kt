@@ -9,6 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.Volley
 import com.z100.valentuesday.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +18,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+
+    companion object Factory {
+        lateinit var requestQueue: RequestQueue
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestQueue = Volley.newRequestQueue(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.z100.valentuesday.R
 import com.z100.valentuesday.databinding.FragmentDashboardBinding
-import com.z100.valentuesday.rename.Const.Factory.spName
-import com.z100.valentuesday.service.ApiService
+import com.z100.valentuesday.util.Const.Factory.SP_NAME
+import com.z100.valentuesday.api.service.ApiService
 import com.z100.valentuesday.service.DataManagerService
 
 class DashboardFragment : Fragment() {
@@ -35,7 +34,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = requireContext().getSharedPreferences(spName, MODE_PRIVATE)
+        val sharedPreferences = requireContext().getSharedPreferences(SP_NAME, MODE_PRIVATE)
         dataManager = DataManagerService(sharedPreferences)
 
         binding.btnContinue.setOnClickListener {

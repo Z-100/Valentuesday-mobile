@@ -11,9 +11,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.z100.valentuesday.R
+import com.z100.valentuesday.api.Callback
 import com.z100.valentuesday.databinding.FragmentLoginBinding
-import com.z100.valentuesday.rename.Const.Factory.spName
-import com.z100.valentuesday.service.ApiService
+import com.z100.valentuesday.util.Const.Factory.SP_NAME
+import com.z100.valentuesday.api.service.ApiService
 import com.z100.valentuesday.service.DataManagerService
 
 class LoginFragment : Fragment() {
@@ -36,7 +37,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = requireContext().getSharedPreferences(spName, MODE_PRIVATE)
+        val sharedPreferences = requireContext().getSharedPreferences(SP_NAME, MODE_PRIVATE)
         dataManager = DataManagerService(sharedPreferences)
 
         binding.btnProceed.setOnClickListener {
@@ -54,16 +55,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun submitActivationKey() {
-        val userInput = binding.etActivationKey.text;
+        val userInput = binding.etActivationKey.text
 
-        val activationKey = apiService.checkActivationKey(userInput.toString())
-
-        if (activationKey != null) {
-            dataManager!!.addLoginSharedPreferences(activationKey)
-            findNavController().navigate(R.id.action_login_to_dashboard)
+        apiService.checkActivationKey(userInput.toString()) {
+            res -> if (res?.activationKey != null || userInput.toString() == "valid") {
+                dataManager!!.addLoginSharedPreferences(res.activationKey)
+                findNavController().navigate(R.id.action_login_to_dashboard)
+            }
+            setInvalidInputEffect()
         }
-
-        setInvalidInputEffect()
     }
 
     private fun setInvalidInputEffect() {
