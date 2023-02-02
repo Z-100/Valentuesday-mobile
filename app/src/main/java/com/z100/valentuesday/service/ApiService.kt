@@ -2,8 +2,10 @@ package com.z100.valentuesday.service
 
 class ApiService {
 
-    fun checkActivationKey(key: String): Boolean {
+    fun checkActivationKey(key: String): String? {
 
-        return key == "valid"
+        val keyFromDb = "valid"
+
+        return if (key == keyFromDb) keyFromDb else null
     }
 }

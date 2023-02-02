@@ -11,15 +11,11 @@
     <string name="previous">Previous</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="activation_failed">Activation failed!</string>
+    <string name="login_activate_account_text">&#32;Activate account</string>
+    <string name="login_enter_activation_key">&#32;&#32;&#32;Enter activation key</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="valentuesday_title">Valentuesday</string>
 </resources>
