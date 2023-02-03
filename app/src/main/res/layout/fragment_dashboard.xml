@@ -44,36 +44,58 @@
                         android:orientation="horizontal"
                         tools:ignore="UselessLeaf">
 
-                    <TextView android:layout_weight="4"
+                    <TextView
+                            android:layout_weight="4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/tv_title"
                             android:gravity="top"
-                            android:textSize="30sp"
-                            android:text="@string/valentuesday_title" />
+                            android:textSize="35sp"
+                            android:text="@string/valentuesday_title"
+                            android:fontFamily="@font/aguafina_script" />
 
-                    <Button android:layout_weight="1"
+                    <Button
+                            android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/input_background_neutral"
                             android:id="@+id/btn_log_off"
                             android:textSize="10sp"
-                            android:text="Log off" />
+                            android:text="Log off"
+                            android:fontFamily="serif-monospace" />
                 </LinearLayout>
 
-
-                <TextView android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginTop="100dp"
-                        android:gravity="top"
-                        android:textSize="20sp"
-                        android:text="Progress: 29%" />
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf">
 
-                <ProgressBar
-                        style="?android:attr/progressBarStyleHorizontal"
+                    <TextView
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:gravity="top"
+                            android:textSize="20sp"
+                            android:id="@+id/progress_text"
+                            android:text="Progress: 29%"
+                            android:fontFamily="serif-monospace" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:layout_weight="1"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/transparent_background"
+                            android:id="@+id/btn_reset_progress"
+                            android:textSize="14sp"
+                            android:text="Reset progress"
+                            android:fontFamily="serif-monospace" />
+                </LinearLayout>
+
+                <ProgressBar style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:id="@+id/progressBar" />
+                        android:id="@+id/progress_horizontal" />
 
             </LinearLayout>
 
@@ -118,24 +140,30 @@
                     android:layout_height="0dp"
                     android:orientation="vertical">
 
-                <TextView android:layout_width="match_parent"
+                <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:textSize="@dimen/text_size_field_desc"
-                        android:text="Water gonna do?" />
+                        android:text="Water gonna do?"
+                        android:fontFamily="serif-monospace" />
 
-                <Button android:layout_width="match_parent"
+                <Button
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_continue"
-                        android:text="Continue" />
+                        android:text="Continue"
+                        android:fontFamily="serif-monospace" />
 
-                <Button android:layout_width="match_parent"
+                <Button
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_question_list"
-                        android:text="Already solved" />
+                        android:text="Already solved"
+                        android:fontFamily="serif-monospace" />
 
             </LinearLayout>
 

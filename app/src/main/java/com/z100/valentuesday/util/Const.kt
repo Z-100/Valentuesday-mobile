@@ -6,6 +6,7 @@ class Const {
 
         const val SP_NAME = "valentuesday"
         const val SP_ACTIVATION_KEY = "act-key"
+        const val SP_TOTAL_PROGRESS = "total-progress"
 
         const val API_URL_BASE = "https://localhost:8080/api/v1" //TODO(Change)
         const val API_URL_ACCOUNT = "$API_URL_BASE/account"

@@ -7,10 +7,14 @@
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/drawable/input_background_neutral.xml" value="0.279" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/drawable/input_background_success.xml" value="0.279" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/drawable/rectangle.xml" value="0.279" />
+        <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/drawable/transparent_background.xml" value="0.279" />
+        <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/activity_main.xml" value="0.42512820512820515" />
+        <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/content_main.xml" value="0.4317708333333333" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/fragment_dashboard.xml" value="0.4317708333333333" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/fragment_login.xml" value="0.41770833333333335" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/fragment_question.xml" value="0.4317708333333333" />
         <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/fragment_question_list.xml" value="0.4317708333333333" />
+        <entry key="..\:/TBZ/Private/Valentuesday/app/src/main/res/layout/pop_up_error.xml" value="0.4317708333333333" />
       </map>
     </option>
   </component>
@@ -18,6 +22,6 @@
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
-    <option name="id" value="jpab" />
+    <option name="id" value="Android" />
   </component>
 </project>

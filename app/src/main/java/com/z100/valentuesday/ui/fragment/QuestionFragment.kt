@@ -1,5 +1,7 @@
 package com.z100.valentuesday.ui.fragment
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,12 +11,14 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.z100.valentuesday.MainActivity
 import com.z100.valentuesday.R
 import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.api.components.Question
 import com.z100.valentuesday.databinding.FragmentQuestionBinding
 import com.z100.valentuesday.service.DataManagerService
 import com.z100.valentuesday.util.Const
+import com.z100.valentuesday.util.Debug
 import java.lang.RuntimeException
 
 class QuestionFragment : Fragment() {
@@ -72,17 +76,31 @@ class QuestionFragment : Fragment() {
 
         if (activationKey == null) {
             findNavController().navigate(R.id.action_dashboard_to_login)
+            TODO("This is bs")
         }
 
-        apiRequestService.getNextQuestionFor(activationKey!!) { res, err ->
+        apiRequestService.getNextQuestionFor(activationKey) { res, err ->
             if (res != null) {
                 currentQuestion = res
+                fillInFields(currentQuestion!!)
             } else if (activationKey == "debug") {
-                currentQuestion = Question(1L, "Answer 3", 3, "One", "Two", "Three")
+                if (Debug.counter < Debug.questionList.size) {
+                    currentQuestion = Debug.questionList[Debug.counter.toInt()]
+                    fillInFields(currentQuestion!!)
+                } else {
+                    findNavController().navigate(R.id.action_question_to_dashboard)
+                }
             } else {
-//                TODO("Handle error accordingly")
+//              TODO("Handle error accordingly")
             }
         }
+    }
+
+    private fun fillInFields(question: Question) {
+        binding.tvQuestion.text = question.question
+        binding.btnAnswerOne.text = question.answerOne
+        binding.btnAnswerTwo.text = question.answerTwo
+        binding.btnAnswerThree.text = question.answerThree
     }
 
     private fun handleAnswer(selectedAnswer: Int) {
@@ -94,6 +112,7 @@ class QuestionFragment : Fragment() {
         }
 
         if (currentQuestion!!.solution == selectedAnswer) {
+            updateTotalQuestionProgress()
             btnSelected.background = activity?.let {
                 ContextCompat.getDrawable(it, R.drawable.input_background_success)
             }
@@ -108,6 +127,26 @@ class QuestionFragment : Fragment() {
             }
 
             btnSelected.startAnimation(animShake)
+        }
+    }
+
+    private fun updateTotalQuestionProgress() {
+        val activationKey = dataManager!!.getActivationKey()
+
+        if (activationKey == null) {
+            findNavController().navigate(R.id.action_dashboard_to_login)
+            TODO("This is bs")
+        }
+
+        apiRequestService.updateTotalQuestionProgress(activationKey) { res, err ->
+            if (res != null) {
+                dataManager!!.updateTotalQuestionProgress(res)
+            } else if (activationKey == "debug") {
+                Debug.counter++
+                dataManager!!.updateTotalQuestionProgress(Debug.counter)
+            } else {
+                TODO("Handle this bs")
+            }
         }
     }
 }

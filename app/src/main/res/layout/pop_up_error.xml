@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.DashboardFragment">
+
+    <LinearLayout android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="@dimen/text_size_field_desc"
+                android:text="Oh no! An error occured" />
+
+        <Button android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_background_neutral"
+                android:id="@+id/btn_try_again"
+                android:text="Try again" />
+
+<!--        <Button android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_background_neutral"
+                android:id="@+id/btn_log_off"
+                android:text="Log off" />-->
+
+    </LinearLayout>
+</LinearLayout>

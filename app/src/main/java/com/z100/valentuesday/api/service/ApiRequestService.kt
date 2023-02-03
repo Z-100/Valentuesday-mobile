@@ -1,5 +1,7 @@
 package com.z100.valentuesday.api.service
 
+import android.telecom.Call
+import com.android.volley.Request
 import com.android.volley.Request.Method.*
 import com.android.volley.VolleyError
 import com.z100.valentuesday.MainActivity
@@ -65,6 +67,30 @@ class ApiRequestService {
                     callback.handle(null, VolleyError(e.message))
                 }
             }, { err ->
+                callback.handle(null, err)
+            })
+        MainActivity.requestQueue.add(req)
+    }
+
+    fun getTotalQuestionProgress(activationKey: String?, callback: Callback<Long>) {
+        val req = GsonRequest(GET, "$API_URL_QUESTION/progress/$activationKey", Long::class.java,
+            { res -> callback.handle(res, null) }, { err ->
+                callback.handle(null, err)
+            })
+        MainActivity.requestQueue.add(req)
+    }
+
+    fun updateTotalQuestionProgress(activationKey: String?, callback: Callback<Long>) {
+        val req = GsonRequest(PUT, "$API_URL_QUESTION/progress/$activationKey", Long::class.java,
+            { res -> callback.handle(res, null) }, { err ->
+                callback.handle(null, err)
+            })
+        MainActivity.requestQueue.add(req)
+    }
+
+    fun resetTotalQuestionProgress(activationKey: String?, callback: Callback<Long>) {
+        val req = GsonRequest(PUT, "$API_URL_QUESTION/reset/$activationKey", Long::class.java,
+            { res -> callback.handle(res, null) }, { err ->
                 callback.handle(null, err)
             })
         MainActivity.requestQueue.add(req)

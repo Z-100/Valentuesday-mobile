@@ -13,6 +13,7 @@ import com.z100.valentuesday.databinding.FragmentDashboardBinding
 import com.z100.valentuesday.util.Const.Factory.SP_NAME
 import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.service.DataManagerService
+import com.z100.valentuesday.util.Debug
 
 class DashboardFragment : Fragment() {
 
@@ -37,6 +38,28 @@ class DashboardFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences(SP_NAME, MODE_PRIVATE)
         dataManager = DataManagerService(sharedPreferences)
 
+        gatherProgressData()
+
+        binding.btnResetProgress.setOnClickListener {
+
+
+            val activationKey = dataManager!!.getActivationKey()
+
+            if (activationKey == null)
+                findNavController().navigate(R.id.action_dashboard_to_login)
+
+            apiRequestService.resetTotalQuestionProgress(activationKey) { res, err ->
+                if (res != null) {
+                    dataManager!!.updateTotalQuestionProgress(res)
+                } else if (activationKey == "debug") {
+                    dataManager!!.updateTotalQuestionProgress(0)
+                } else {
+                    TODO("Impl error bs")
+                }
+            }
+            gatherProgressData()
+        }
+
         binding.btnContinue.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_question)
         }
@@ -55,12 +78,36 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
+    private fun gatherProgressData() {
+        val activationKey = dataManager!!.getActivationKey()
+
+        if (activationKey == null)
+            findNavController().navigate(R.id.action_dashboard_to_login)
+
+        apiRequestService.getTotalQuestionProgress(activationKey) { res, err ->
+            if (res != null) {
+                dataManager!!.updateTotalQuestionProgress(res)
+
+                binding.progressText.text = "Total progress: $res"
+                binding.progressHorizontal.progress = res.toInt()
+            } else if (activationKey == "debug") {
+                Debug.counter = dataManager!!.getTotalQuestionProgress() ?: 0
+                val progress = 100 / Debug.questionList.size * Debug.counter
+                binding.progressText.text = "Total progress: $progress"
+                binding.progressHorizontal.progress = progress.toInt()
+            } else {
+                binding.progressText.text = "Oops! Something went wrong!"
+                binding.progressHorizontal.progress = 0
+            }
+        }
+    }
+
     private fun logOff() {
         val actKeyCleared = dataManager!!.clearActivationKey()
 
         if (actKeyCleared)
             findNavController().navigate(R.id.action_dashboard_to_login)
-
-        Snackbar.make(requireView(), "Logging off failed!", 5).show()
+        else
+            Snackbar.make(requireView(), "Logging off failed!", 5).show()
     }
 }

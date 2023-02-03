@@ -12,9 +12,9 @@
 
     <!-- Strings related to login -->
     <string name="activation_failed">Activation failed!</string>
-    <string name="login_activate_account_text">&#32;Activate account</string>
-    <string name="login_enter_activation_key">&#32;&#32;&#32;Enter activation key</string>
-    <string name="login_invalid_activation_key">&#32;&#32;&#32;Invalid activation key</string>
+    <string name="login_activate_account_text">Activate account</string>
+    <string name="login_enter_activation_key">exam#123#ple</string>
+    <string name="login_invalid_activation_key">Invalid activation key</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
