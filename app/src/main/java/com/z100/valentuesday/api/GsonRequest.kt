@@ -19,9 +19,9 @@ class GsonRequest<Clazz: Any>(
 
     private var mListener: Response.Listener<Clazz>? = listener
 
-    private var mParams = HashMap<String, String>()
+    private var mParams: MutableMap<String, String>? = null
 
-    private var mBody = String()
+    private var mBody: String? = null
 
     override fun parseNetworkResponse(response: NetworkResponse?): Response<Clazz> {
 
@@ -52,12 +52,14 @@ class GsonRequest<Clazz: Any>(
     }
 
     fun withParam(name: String, value: String): GsonRequest<Clazz> {
-        mParams[name] = value
+        if (mParams == null)
+            mParams = HashMap()
+        mParams!![name] = value
         return this
     }
 
-    override fun getParams(): HashMap<String, String> {
-        return mParams
+    override fun getParams(): MutableMap<String, String>? {
+        return mParams?:super.getParams()
     }
 
     fun withBody(body: Any): GsonRequest<Clazz> {
@@ -66,6 +68,6 @@ class GsonRequest<Clazz: Any>(
     }
 
     override fun getBody(): ByteArray {
-        return mBody.toByteArray()
+        return mBody?.toByteArray() ?: super.getBody()
     }
 }

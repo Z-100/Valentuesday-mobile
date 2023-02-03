@@ -1,4 +1,4 @@
-package com.z100.valentuesday.components
+package com.z100.valentuesday.api.components
 
 data class Account(
     val id: Long?,

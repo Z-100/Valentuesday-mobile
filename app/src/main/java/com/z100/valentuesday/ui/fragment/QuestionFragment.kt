@@ -1,60 +1,113 @@
 package com.z100.valentuesday.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.z100.valentuesday.R
+import com.z100.valentuesday.api.service.ApiRequestService
+import com.z100.valentuesday.api.components.Question
+import com.z100.valentuesday.databinding.FragmentQuestionBinding
+import com.z100.valentuesday.service.DataManagerService
+import com.z100.valentuesday.util.Const
+import java.lang.RuntimeException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [QuestionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class QuestionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentQuestionBinding? = null
+
+    private val binding get() = _binding!!
+
+    private val apiRequestService = ApiRequestService()
+
+    private var dataManager: DataManagerService? = null
+
+    private var currentQuestion: Question? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        _binding = FragmentQuestionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = requireContext().getSharedPreferences(Const.SP_NAME, Context.MODE_PRIVATE)
+        dataManager = DataManagerService(sharedPreferences)
+
+        gatherQuestionData()
+
+        binding.btnGoBack.setOnClickListener {
+            findNavController().navigate(R.id.action_question_to_dashboard)
+        }
+
+        binding.btnAnswerOne.setOnClickListener {
+            handleAnswer(1)
+        }
+
+        binding.btnAnswerTwo.setOnClickListener {
+            handleAnswer(2)
+        }
+
+        binding.btnAnswerThree.setOnClickListener {
+            handleAnswer(3)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QuestionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QuestionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun gatherQuestionData() {
+
+        val activationKey = dataManager!!.getActivationKey()
+
+        if (activationKey == null) {
+            findNavController().navigate(R.id.action_dashboard_to_login)
+        }
+
+        apiRequestService.getNextQuestionFor(activationKey!!) { res, err ->
+            if (res != null) {
+                currentQuestion = res
+            } else if (activationKey == "debug") {
+                currentQuestion = Question(1L, "Answer 3", 3, "One", "Two", "Three")
+            } else {
+//                TODO("Handle error accordingly")
             }
+        }
+    }
+
+    private fun handleAnswer(selectedAnswer: Int) {
+        val btnSelected = when (selectedAnswer) {
+            1 -> binding.btnAnswerOne
+            2 -> binding.btnAnswerTwo
+            3 -> binding.btnAnswerThree
+            else -> throw RuntimeException(Const.ERROR_IMPOSSIBLE_INPUT)
+        }
+
+        if (currentQuestion!!.solution == selectedAnswer) {
+            btnSelected.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.input_background_success)
+            }
+            findNavController().navigate(R.id.action_question_to_question)
+        } else {
+            val animShake = activity?.let {
+                AnimationUtils.loadAnimation(it, R.anim.shake)
+            }
+
+            btnSelected.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.input_background_error)
+            }
+
+            btnSelected.startAnimation(animShake)
+        }
     }
 }

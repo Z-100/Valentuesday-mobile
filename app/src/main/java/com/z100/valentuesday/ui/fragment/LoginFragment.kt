@@ -11,10 +11,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.z100.valentuesday.R
-import com.z100.valentuesday.api.Callback
 import com.z100.valentuesday.databinding.FragmentLoginBinding
 import com.z100.valentuesday.util.Const.Factory.SP_NAME
-import com.z100.valentuesday.api.service.ApiService
+import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.service.DataManagerService
 
 class LoginFragment : Fragment() {
@@ -23,7 +22,7 @@ class LoginFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val apiService = ApiService()
+    private val apiRequestService = ApiRequestService()
 
     private var dataManager: DataManagerService? = null
 
@@ -40,12 +39,14 @@ class LoginFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences(SP_NAME, MODE_PRIVATE)
         dataManager = DataManagerService(sharedPreferences)
 
+        skipLoginIfActivationKeyPresent()
+
         binding.btnProceed.setOnClickListener {
             submitActivationKey()
         }
 
-        binding.etActivationKey.doOnTextChanged {
-                _, _, _, _ -> revertInvalidInputEffect()
+        binding.etActivationKey.doOnTextChanged { _, _, _, _ ->
+            revertInvalidInputEffect()
         }
     }
 
@@ -54,19 +55,29 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
+    private fun skipLoginIfActivationKeyPresent() {
+        if (dataManager!!.getActivationKey() != null)
+            findNavController().navigate(R.id.action_login_to_dashboard)
+    }
+
     private fun submitActivationKey() {
         val userInput = binding.etActivationKey.text
 
-        apiService.checkActivationKey(userInput.toString()) {
-            res -> if (res?.activationKey != null || userInput.toString() == "valid") {
-                dataManager!!.addLoginSharedPreferences(res.activationKey)
+        apiRequestService.checkActivationKey(userInput.toString()) { res, err ->
+            if (res?.activationKey != null) {
+                dataManager!!.addActivationKey(res.activationKey)
                 findNavController().navigate(R.id.action_login_to_dashboard)
+            } else if (userInput.toString() == "debug") {
+                dataManager!!.addActivationKey(userInput.toString())
+                findNavController().navigate(R.id.action_login_to_dashboard)
+//                TODO("remove this code, or let it be for debug mode")
+            } else {
+                setInvalidInputEffect(err?.message)
             }
-            setInvalidInputEffect()
         }
     }
 
-    private fun setInvalidInputEffect() {
+    private fun setInvalidInputEffect(msg: String? = "Activation key invalid") {
         val etActivationKey = binding.etActivationKey
 
         val animShake = activity?.let {
@@ -77,6 +88,10 @@ class LoginFragment : Fragment() {
             ContextCompat.getDrawable(it, R.drawable.input_background_error)
         }
 
+        etActivationKey.hint = activity?.let {
+            getString(R.string.login_invalid_activation_key)
+        }
+
         etActivationKey.startAnimation(animShake)
     }
 
@@ -85,6 +100,10 @@ class LoginFragment : Fragment() {
 
         etActivationKey.background = activity?.let {
             ContextCompat.getDrawable(it, R.drawable.input_background_neutral)
+        }
+
+        etActivationKey.hint = activity?.let {
+            getString(R.string.login_enter_activation_key)
         }
     }
 }

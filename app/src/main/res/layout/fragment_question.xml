@@ -1,14 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.fragment.QuestionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Text area -->
+    <LinearLayout android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="0dp"
+            android:orientation="vertical">
 
-</FrameLayout>
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal">
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+
+                <!-- Filler -->
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="vertical"
+                        tools:ignore="UselessLeaf">
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf">
+
+                    <TextView android:layout_weight="4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tv_title"
+                            android:gravity="top"
+                            android:textSize="30sp"
+                            android:text="@string/valentuesday_title" />
+
+                    <Button android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/input_background_neutral"
+                            android:id="@+id/btn_go_back"
+                            android:textSize="10sp"
+                            android:text="Go back" />
+                </LinearLayout>
+
+                <!-- Filler -->
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="vertical"
+                        tools:ignore="UselessLeaf">
+                </LinearLayout>
+
+                <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="100dp"
+                        android:layout_marginTop="100dp"
+                        android:id="@+id/tv_question"
+                        android:gravity="top"
+                        android:textSize="20sp"
+                        android:maxLength="140"
+                        android:text="Some random question about idk, the relationship. blab lalslblab lalslblab lalslblab lalslblab lalslblab lalslblab lalslblab balls balls bal" />
+            </LinearLayout>
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Input area -->
+    <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+
+        <!-- Filler -->
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:ignore="UselessLeaf">
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+
+            <LinearLayout android:layout_weight="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                <TextView android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textSize="@dimen/text_size_field_desc"
+                        android:text="Answer the question" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/input_background_neutral"
+                        android:id="@+id/btn_answer_one"
+                        android:maxLength="32"
+                        android:text="Answer One, very good, very nice" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/input_background_neutral"
+                        android:id="@+id/btn_answer_two"
+                        android:maxLength="32"
+                        android:text="Beetlejuice" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/input_background_neutral"
+                        android:id="@+id/btn_answer_three"
+                        android:maxLength="32"
+                        android:text="Idk about 20 feet?" />
+            </LinearLayout>
+
+
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Filler -->
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:ignore="UselessLeaf">
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

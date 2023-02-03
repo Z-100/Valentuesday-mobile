@@ -16,8 +16,8 @@ import com.z100.valentuesday.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
 
+    private lateinit var binding: ActivityMainBinding
 
     companion object Factory {
         lateinit var requestQueue: RequestQueue

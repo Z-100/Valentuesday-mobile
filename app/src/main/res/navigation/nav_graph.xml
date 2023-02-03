@@ -36,6 +36,11 @@
 
         <action android:id="@+id/action_question_to_dashboard"
                 app:destination="@id/DashboardFragment" />
+
+        <action android:id="@+id/action_question_to_question"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:destination="@id/QuestionFragment" />
     </fragment>
 
     <fragment android:id="@+id/QuestionListFragment"

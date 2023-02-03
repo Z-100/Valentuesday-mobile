@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.z100.valentuesday.R
 import com.z100.valentuesday.databinding.FragmentDashboardBinding
 import com.z100.valentuesday.util.Const.Factory.SP_NAME
-import com.z100.valentuesday.api.service.ApiService
+import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.service.DataManagerService
 
 class DashboardFragment : Fragment() {
@@ -20,7 +20,7 @@ class DashboardFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val apiService = ApiService()
+    private val apiRequestService = ApiRequestService()
 
     private var dataManager: DataManagerService? = null
 
@@ -50,17 +50,17 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun logOff() {
-        val actKeyCleared = dataManager!!.clearLoginSharedPreferences()
+        val actKeyCleared = dataManager!!.clearActivationKey()
 
         if (actKeyCleared)
             findNavController().navigate(R.id.action_dashboard_to_login)
 
         Snackbar.make(requireView(), "Logging off failed!", 5).show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

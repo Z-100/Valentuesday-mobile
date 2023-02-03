@@ -1,5 +1,7 @@
 package com.z100.valentuesday.api
 
-fun interface Callback {
-    fun handle(any: Any?)
+import com.android.volley.VolleyError
+
+fun interface Callback<T> {
+    fun handle(success: T?, error: VolleyError?)
 }

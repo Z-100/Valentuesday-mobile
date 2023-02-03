@@ -6,7 +6,6 @@
         android:orientation="vertical"
         tools:context=".ui.fragment.DashboardFragment">
 
-
     <!-- Text area -->
     <LinearLayout android:layout_weight="1"
             android:layout_width="match_parent"
