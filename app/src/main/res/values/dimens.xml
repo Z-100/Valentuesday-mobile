@@ -7,6 +7,7 @@
 
     <dimen name="text_size_field_desc">20sp</dimen>
 
-
-
+    <dimen name="headerTextSize">22sp</dimen>
+    <dimen name="newsMoreTextSize">16sp</dimen>
+    <dimen name="signup_text_margin_top">5dp</dimen>
 </resources>

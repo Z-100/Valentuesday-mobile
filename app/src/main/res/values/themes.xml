@@ -22,4 +22,16 @@
     <style name="Theme.Valentuesday.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Valentuesday.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="inputField">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:background">@drawable/input_background_neutral</item>
+        <item name="android:fontFamily">serif-monospace</item>
+    </style>
+
+    <style name="button">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:background">@drawable/input_background_neutral</item>
+        <item name="android:fontFamily">serif-monospace</item>
+    </style>
 </resources>

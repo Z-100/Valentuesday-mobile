@@ -104,19 +104,17 @@
                         android:layout_height="60dp"
                         android:padding="5dp"
                         android:id="@+id/et_activation_key"
-                        android:background="@drawable/input_background_neutral"
+                        style="@style/inputField"
                         android:inputType="textPersonName"
-                        android:fontFamily="serif-monospace"
                         android:hint="@string/login_enter_activation_key"
-                        android:ems="10"
                         tools:ignore="NestedWeights" />
 
                 <Button android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/input_background_neutral"
+                        style="@style/button"
                         android:id="@+id/btn_proceed"
-                        android:text="Proceed" />
+                        android:text="Log in" />
 
             </LinearLayout>
 

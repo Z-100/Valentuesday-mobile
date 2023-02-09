@@ -16,5 +16,7 @@
     <color name="neutral_fill">#EAEAEA</color>
     <color name="neutral_border">#BCBCBC</color>
 
+    <color name="blackTextColor">#000</color>
+    <color name="colorLoginPrimaryDark">#FDFFFF</color>
 
 </resources>

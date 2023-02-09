@@ -1,7 +1,5 @@
 package com.z100.valentuesday.ui.fragment
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +9,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.z100.valentuesday.MainActivity
 import com.z100.valentuesday.R
 import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.api.components.Question

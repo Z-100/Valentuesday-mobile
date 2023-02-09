@@ -63,20 +63,22 @@
 
                 <!-- Filler -->
                 <LinearLayout android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:orientation="vertical"
                         tools:ignore="UselessLeaf">
                 </LinearLayout>
 
                 <TextView android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="130dp"
                         android:maxHeight="100dp"
                         android:layout_marginTop="100dp"
                         android:id="@+id/tv_question"
+                        android:background="@drawable/input_background_neutral"
+                        android:padding="15dp"
                         android:gravity="top"
                         android:textSize="20sp"
                         android:maxLength="140"
-                        android:text="Some random question about idk, the relationship. blab lalslblab lalslblab lalslblab lalslblab lalslblab lalslblab lalslblab balls balls bal" />
+                        android:text="" />
             </LinearLayout>
 
             <!-- Filler -->
@@ -132,7 +134,7 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_one"
                         android:maxLength="32"
-                        android:text="Answer One, very good, very nice" />
+                        android:text="" />
 
                 <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="match_parent"
@@ -141,7 +143,7 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_two"
                         android:maxLength="32"
-                        android:text="Beetlejuice" />
+                        android:text="" />
 
                 <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="match_parent"
@@ -150,7 +152,7 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_three"
                         android:maxLength="32"
-                        android:text="Idk about 20 feet?" />
+                        android:text="" />
             </LinearLayout>
 
 
