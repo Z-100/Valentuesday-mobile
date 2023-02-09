@@ -71,27 +71,38 @@ class QuestionFragment : Fragment() {
     }
 
     private fun gatherQuestionData() {
-
-        val activationKey = dataManager!!.getActivationKey()
-
-        if (activationKey == null) {
-            findNavController().navigate(R.id.action_dashboard_to_login)
-            TODO("This is bs")
+        if (dataManager!!.allQuestionsExists()) {
+            val progress = dataManager!!.getTotalQuestionProgress()
+            currentQuestion = dataManager!!.getSpecificQuestion(progress!!)
+            fillInFields(currentQuestion!!)
+            return
         }
 
-        apiRequestService.getNextQuestionFor(activationKey) { res, err ->
+        val activationKey = dataManager!!.getActivationKey()
+        val jwt = dataManager!!.getAccessToken()
+
+        if (jwt == null || activationKey == null) {
+            findNavController().navigate(R.id.action_dashboard_to_login)
+            return
+        }
+
+        if (Debug.isDebug(activationKey)) {
+            if (Debug.counter < Debug.questionList.size) {
+                currentQuestion = Debug.questionList[Debug.counter.toInt()]
+                fillInFields(currentQuestion!!)
+            } else {
+                findNavController().navigate(R.id.action_question_to_finished)
+            }
+            return
+        }
+
+        apiRequestService.getNextQuestionFor(jwt) { res, err ->
             if (res != null) {
                 currentQuestion = res
                 fillInFields(currentQuestion!!)
-            } else if (activationKey == "debug") {
-                if (Debug.counter < Debug.questionList.size) {
-                    currentQuestion = Debug.questionList[Debug.counter.toInt()]
-                    fillInFields(currentQuestion!!)
-                } else {
-                    findNavController().navigate(R.id.action_question_to_dashboard)
-                }
             } else {
-//              TODO("Handle error accordingly")
+                if ( err!!.networkResponse.statusCode == 409)
+                    findNavController().navigate(R.id.action_question_to_finished)
             }
         }
     }
@@ -132,20 +143,25 @@ class QuestionFragment : Fragment() {
 
     private fun updateTotalQuestionProgress() {
         val activationKey = dataManager!!.getActivationKey()
+        val jwt = dataManager!!.getAccessToken()
 
-        if (activationKey == null) {
+        if (jwt == null || activationKey == null) {
             findNavController().navigate(R.id.action_dashboard_to_login)
-            TODO("This is bs")
+            return
         }
 
-        apiRequestService.updateTotalQuestionProgress(activationKey) { res, err ->
+        if (Debug.isDebug(activationKey)) {
+            Debug.counter++
+            dataManager!!.updateTotalQuestionProgress(Debug.counter)
+            return
+        }
+
+        apiRequestService.updateTotalQuestionProgress(jwt) { res, err ->
             if (res != null) {
                 dataManager!!.updateTotalQuestionProgress(res)
-            } else if (activationKey == "debug") {
-                Debug.counter++
-                dataManager!!.updateTotalQuestionProgress(Debug.counter)
             } else {
-                TODO("Handle this bs")
+                if (err!!.networkResponse.statusCode == 409)
+                    findNavController().navigate(R.id.action_question_to_finished)
             }
         }
     }

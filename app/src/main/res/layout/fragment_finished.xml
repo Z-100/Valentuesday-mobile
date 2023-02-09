@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.FinishedFragment">
+
+    <!-- Text area -->
+    <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal">
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+
+                <!-- Filler -->
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="vertical"
+                        tools:ignore="UselessLeaf">
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf">
+
+                    <TextView
+                            android:layout_weight="4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tv_title"
+                            android:gravity="top"
+                            android:textSize="35sp"
+                            android:text="@string/valentuesday_title"
+                            android:fontFamily="@font/aguafina_script" />
+
+                    <Button
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/input_background_neutral"
+                            android:id="@+id/btn_log_off"
+                            android:textSize="10sp"
+                            android:text="Log off"
+                            android:fontFamily="serif-monospace" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="100dp"
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf">
+
+                    <TextView
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:gravity="top"
+                            android:textSize="20sp"
+                            android:id="@+id/progress_text"
+                            android:text="You've done it!\n You're finished!"
+                            android:fontFamily="serif-monospace" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Input area -->
+    <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+
+        <!-- Filler -->
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:ignore="UselessLeaf">
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+
+            <LinearLayout android:layout_weight="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textSize="@dimen/text_size_field_desc"
+                        android:text="Water gonna do?"
+                        android:fontFamily="serif-monospace" />
+
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/input_background_neutral"
+                        android:id="@+id/btn_to_dashboard"
+                        android:text="To dashboard"
+                        android:fontFamily="serif-monospace" />
+            </LinearLayout>
+
+
+
+            <!-- Filler -->
+            <LinearLayout android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessLeaf">
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Filler -->
+        <LinearLayout android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:ignore="UselessLeaf">
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

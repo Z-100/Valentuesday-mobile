@@ -1,14 +1,10 @@
 package com.z100.valentuesday
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.z100.valentuesday.databinding.ActivityMainBinding

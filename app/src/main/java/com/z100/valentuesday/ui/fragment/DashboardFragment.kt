@@ -41,23 +41,29 @@ class DashboardFragment : Fragment() {
         gatherProgressData()
 
         binding.btnResetProgress.setOnClickListener {
-
-
             val activationKey = dataManager!!.getActivationKey()
+            val jwt = dataManager!!.getAccessToken()
 
-            if (activationKey == null)
+            if (jwt == null || activationKey == null) {
                 findNavController().navigate(R.id.action_dashboard_to_login)
+            }
 
-            apiRequestService.resetTotalQuestionProgress(activationKey) { res, err ->
+            apiRequestService.resetTotalQuestionProgress(jwt!!) { res, err ->
                 if (res != null) {
                     dataManager!!.updateTotalQuestionProgress(res)
+                    binding.progressText.text = "Total progress: $res"
+                    binding.progressHorizontal.progress = res.toInt()
                 } else if (activationKey == "debug") {
                     dataManager!!.updateTotalQuestionProgress(0)
+                    Debug.counter = dataManager!!.getTotalQuestionProgress() ?: 0
+                    val progress = 100 / Debug.questionList.size * Debug.counter
+                    binding.progressText.text = "Total progress: $progress"
+                    binding.progressHorizontal.progress = progress.toInt()
                 } else {
-                    TODO("Impl error bs")
+                    binding.progressText.text = "Oops! Something went wrong!"
+                    binding.progressHorizontal.progress = 0
                 }
             }
-            gatherProgressData()
         }
 
         binding.btnContinue.setOnClickListener {
@@ -80,20 +86,30 @@ class DashboardFragment : Fragment() {
 
     private fun gatherProgressData() {
         val activationKey = dataManager!!.getActivationKey()
+        val jwt = dataManager!!.getAccessToken()
 
-        if (activationKey == null)
+        if (activationKey == null || jwt == null) {
             findNavController().navigate(R.id.action_dashboard_to_login)
+            return
+        }
 
-        apiRequestService.getTotalQuestionProgress(activationKey) { res, err ->
+        if (Debug.isDebug(activationKey)) {
+            Debug.counter = dataManager!!.getTotalQuestionProgress() ?: 0
+
+            val progress = 100 / Debug.questionList.size * Debug.counter
+
+            binding.progressText.text = "Total progress: $progress %"
+            binding.progressHorizontal.progress = progress.toInt()
+            return
+        }
+
+        apiRequestService.getTotalQuestionProgress(jwt) { res, err ->
             if (res != null) {
                 dataManager!!.updateTotalQuestionProgress(res)
 
-                binding.progressText.text = "Total progress: $res"
-                binding.progressHorizontal.progress = res.toInt()
-            } else if (activationKey == "debug") {
-                Debug.counter = dataManager!!.getTotalQuestionProgress() ?: 0
-                val progress = 100 / Debug.questionList.size * Debug.counter
-                binding.progressText.text = "Total progress: $progress"
+                val progress = 100 / dataManager!!.getAllQuestions()!!.size * res
+
+                binding.progressText.text = "Total progress: $progress %"
                 binding.progressHorizontal.progress = progress.toInt()
             } else {
                 binding.progressText.text = "Oops! Something went wrong!"
@@ -103,9 +119,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun logOff() {
-        val actKeyCleared = dataManager!!.clearActivationKey()
-
-        if (actKeyCleared)
+        if (dataManager!!.clearAll())
             findNavController().navigate(R.id.action_dashboard_to_login)
         else
             Snackbar.make(requireView(), "Logging off failed!", 5).show()

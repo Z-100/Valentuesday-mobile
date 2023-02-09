@@ -10,11 +10,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.z100.valentuesday.R
 import com.z100.valentuesday.databinding.FragmentLoginBinding
 import com.z100.valentuesday.util.Const.Factory.SP_NAME
 import com.z100.valentuesday.api.service.ApiRequestService
 import com.z100.valentuesday.service.DataManagerService
+import com.z100.valentuesday.util.Debug
+import com.z100.valentuesday.util.Logger
 
 class LoginFragment : Fragment() {
 
@@ -56,23 +59,61 @@ class LoginFragment : Fragment() {
     }
 
     private fun skipLoginIfActivationKeyPresent() {
-        if (dataManager!!.getActivationKey() != null)
-            findNavController().navigate(R.id.action_login_to_dashboard)
+
+        val activationKey = dataManager!!.getActivationKey()
+        val hasToken = dataManager!!.getAccessToken() != null
+
+        Logger.log("Activation key: $activationKey | Has token: $hasToken", this.javaClass)
+
+        if (!activationKey.isNullOrBlank() && (hasToken || Debug.isDebug(activationKey)))
+            getAllQuestions()
     }
 
     private fun submitActivationKey() {
-        val userInput = binding.etActivationKey.text
+        val userInputActKey = binding.etActivationKey.text
 
-        apiRequestService.checkActivationKey(userInput.toString()) { res, err ->
-            if (res?.activationKey != null) {
-                dataManager!!.addActivationKey(res.activationKey)
-                findNavController().navigate(R.id.action_login_to_dashboard)
-            } else if (userInput.toString() == "debug") {
-                dataManager!!.addActivationKey(userInput.toString())
-                findNavController().navigate(R.id.action_login_to_dashboard)
-//                TODO("remove this code, or let it be for debug mode")
+        if (Debug.isDebug(userInputActKey.toString())) {
+            dataManager!!.addActivationKey(userInputActKey.toString())
+            dataManager!!.addAccessToken(userInputActKey.toString())
+            Logger.log("Debug activation key added", this.javaClass)
+            getAllQuestions()
+            return
+        }
+
+        apiRequestService.checkActivationKey(userInputActKey.toString()) { res, err ->
+            if (res?.jwt != null) {
+                dataManager!!.addActivationKey(userInputActKey.toString())
+                dataManager!!.addAccessToken(res.jwt)
+                getAllQuestions()
             } else {
                 setInvalidInputEffect(err?.message)
+                Logger.log("Error retrieving login: ${err?.message}", this.javaClass)
+            }
+        }
+    }
+
+    private fun getAllQuestions() {
+        val activationKey = dataManager!!.getActivationKey()
+        val jwt = dataManager!!.getAccessToken()
+
+        if (activationKey == null || jwt == null) {
+            Logger.log("Get all questions failed: $activationKey:$jwt", this.javaClass)
+            return
+        }
+
+        if (Debug.isDebug(activationKey)) {
+            dataManager!!.addAllQuestions(Debug.questionList)
+            Logger.log("Debug question list gathered", this.javaClass)
+            findNavController().navigate(R.id.action_login_to_dashboard)
+            return
+        }
+
+        apiRequestService.getAllQuestionsFor(jwt) { res, err ->
+            if (res != null) {
+                dataManager!!.addAllQuestions(res)
+                findNavController().navigate(R.id.action_login_to_dashboard)
+            } else {
+                view?.let { Snackbar.make(it, "No questions found!", 2).show() }
             }
         }
     }

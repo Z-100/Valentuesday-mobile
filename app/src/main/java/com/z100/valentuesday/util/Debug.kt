@@ -4,6 +4,10 @@ import com.z100.valentuesday.api.components.Question
 
 class Debug {
     companion object Factory {
+        fun isDebug(activationKey: String): Boolean {
+            return activationKey == Const.DEBUG
+        }
+
         var counter: Long = 0
         var questionList = listOf(
             Question(1L, "Assuming 2 + 2 = 5, how many trees?", 1, "A thousand", "A million", "Negative three"),

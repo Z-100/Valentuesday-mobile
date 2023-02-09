@@ -41,6 +41,11 @@
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:destination="@id/QuestionFragment" />
+
+        <action android:id="@+id/action_question_to_finished"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:destination="@id/FinishedFragment" />
     </fragment>
 
     <fragment android:id="@+id/QuestionListFragment"
@@ -50,5 +55,17 @@
 
         <action android:id="@+id/action_question_list_to_dashboard"
                 app:destination="@id/DashboardFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/FinishedFragment"
+            android:name="com.z100.valentuesday.ui.fragment.FinishedFragment"
+            android:label="@string/finished_fragment_label"
+            tools:layout="@layout/fragment_finished">
+
+        <action android:id="@+id/action_finished_to_dashboard"
+                app:destination="@id/DashboardFragment" />
+
+        <action android:id="@+id/action_finished_to_login"
+            app:destination="@id/LoginFragment" />
     </fragment>
 </navigation>
