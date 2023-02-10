@@ -2,11 +2,13 @@ package com.z100.valentuesday.service
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.z100.valentuesday.api.components.Question
 import com.z100.valentuesday.util.Const.Factory.SP_ACCESS_TOKEN
 import com.z100.valentuesday.util.Const.Factory.SP_ACTIVATION_KEY
 import com.z100.valentuesday.util.Const.Factory.SP_ALL_QUESTIONS
 import com.z100.valentuesday.util.Const.Factory.SP_TOTAL_PROGRESS
+import com.z100.valentuesday.util.Logger
 
 class DataManagerService(private val sp: SharedPreferences) {
 
@@ -79,12 +81,16 @@ class DataManagerService(private val sp: SharedPreferences) {
     fun getSpecificQuestion(id: Long): Question? {
         val json = sp.getString(SP_ALL_QUESTIONS, null) ?: return null
 
-        val questions = Gson().fromJson(json, List::class.java) as List<Question>
+        Logger.log("#getSpecificQuestion: $json", this.javaClass)
 
-        return questions.stream()
-            .filter { it.id == id }
-            .findFirst()
-            .orElse(null)
+        val questions = Gson().fromJson(json, TypeToken<List<Question>>() {}.type)
+
+        for (question in questions) {
+            if ((question as Question).id == id) {
+                return question
+            }
+        }
+        return null
     }
 
     fun allQuestionsExists(): Boolean {
