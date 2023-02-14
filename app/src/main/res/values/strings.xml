@@ -20,4 +20,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="valentuesday_title">Valentuesday</string>
     <string name="finished_fragment_label" />
+    <string name="login_activate_account_desc">Enter the code your SO gave to you.</string>
+    <string name="title">Valentuesday</string>
 </resources>

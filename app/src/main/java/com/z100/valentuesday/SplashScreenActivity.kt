@@ -28,10 +28,8 @@ class SplashScreenActivity : AppCompatActivity() {
         )
 
         val backgroundImage: ImageView = findViewById(R.id.SplashScreenImage)
-        val backgroundImage2: ImageView = findViewById(R.id.SplashScreenImage_2)
         val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         backgroundImage.startAnimation(slideAnimation)
-        backgroundImage2.startAnimation(slideAnimation)
 
         Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)

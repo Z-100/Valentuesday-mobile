@@ -32,21 +32,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/tv_title"
-                    android:fontFamily="@font/aguafina_script"
-                    android:gravity="center"
-                    android:textSize="50sp"
-                    android:text="@string/valentuesday_title" />
+                    android:text="Valentuesday"
+                    style="@style/text_h1" />
 
-            <TextView
-                    android:layout_weight="1"
+            <TextView android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/tv_desc"
                     android:gravity="center_horizontal"
-                    android:textSize="20sp"
-                    android:text="Your personal mystery app"
-                    android:fontFamily="serif-monospace" />
-
+                    android:text="Have fun answering questions!"
+                    style="@style/text_h3" />
         </LinearLayout>
     </LinearLayout>
 
@@ -81,26 +75,18 @@
                     android:layout_height="0dp"
                     android:orientation="vertical">
 
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:textSize="30sp"
-                        android:textFontWeight="600"
+                <TextView android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:text="@string/login_activate_account_text"
-                        android:fontFamily="serif-monospace"
-                        android:textStyle="bold" />
+                        style="@style/text_h2" />
 
-                <TextView
-                        android:layout_width="260dp"
+                <TextView android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:textSize="15dp"
-                        android:text="Enter the code your SO gave to you."
-                        android:textFontWeight="400"
-                        android:fontFamily="serif-monospace" />
+                        android:text="Enter your personal code"
+                        style="@style/text_h3" />
 
-                <EditText android:layout_width="match_parent"
+                <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:padding="5dp"
                         android:id="@+id/et_activation_key"

@@ -5,17 +5,9 @@
         android:layout_height="match_parent"
         tools:context=".SplashScreenActivity">
 
-    <ImageView
-            android:id="@+id/SplashScreenImage"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:src="@drawable/input_background_error" />
-
-    <ImageView
-            android:id="@+id/SplashScreenImage_2"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="300dp"
-            android:src="@drawable/input_background_success" />
+    <ImageView android:id="@+id/SplashScreenImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_trans" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

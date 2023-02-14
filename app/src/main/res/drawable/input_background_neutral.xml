@@ -2,10 +2,10 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
 
     <!-- View background color -->
-    <solid android:color="@color/neutral_fill" />
+    <solid android:color="#A494AD" />
 
     <!-- View border color and width -->
-    <stroke android:width="1dip" android:color="@color/neutral_border"/>
+    <stroke android:width="1dip" android:color="#00BCBCBC"/>
 
     <!-- The radius makes the corners rounded -->
     <corners android:radius="20dp" />

@@ -3,5 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aguafina_script</item>
         <item>@font/allura</item>
+        <item>@font/montserrat</item>
+        <item>@font/montserrat_alternates_thin</item>
     </array>
 </resources>

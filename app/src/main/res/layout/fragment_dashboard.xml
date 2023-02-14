@@ -50,9 +50,9 @@
                             android:layout_height="match_parent"
                             android:id="@+id/tv_title"
                             android:gravity="top"
-                            android:textSize="35sp"
+                            android:textSize="45sp"
                             android:text="@string/valentuesday_title"
-                            android:fontFamily="@font/aguafina_script" />
+                            style="@style/text_h2" />
 
                     <Button
                             android:layout_weight="1"
@@ -62,7 +62,7 @@
                             android:id="@+id/btn_log_off"
                             android:textSize="10sp"
                             android:text="Log off"
-                            android:fontFamily="serif-monospace" />
+                            style="@style/button" />
                 </LinearLayout>
 
                 <LinearLayout android:layout_width="match_parent"
@@ -72,24 +72,13 @@
                         tools:ignore="UselessLeaf">
 
                     <TextView
-                            android:layout_weight="3"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:gravity="top"
-                            android:textSize="20sp"
-                            android:id="@+id/progress_text"
-                            android:text="Progress: 29%"
-                            android:fontFamily="serif-monospace" />
-
-                    <androidx.appcompat.widget.AppCompatButton
                             android:layout_weight="1"
-                            android:layout_width="20dp"
-                            android:layout_height="30dp"
-                            android:background="@drawable/transparent_background"
-                            android:id="@+id/btn_reset_progress"
-                            android:textSize="14sp"
-                            android:text="Reset progress"
-                            android:fontFamily="serif-monospace" />
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:gravity="top"
+                            android:id="@+id/progress_text"
+                            android:text="Progress:    %"
+                            style="@style/text_h2" />
                 </LinearLayout>
 
                 <ProgressBar style="?android:attr/progressBarStyleHorizontal"
@@ -113,7 +102,8 @@
     <LinearLayout android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
         <!-- Filler -->
         <LinearLayout android:layout_weight="1"
@@ -143,9 +133,9 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:textSize="@dimen/text_size_field_desc"
-                        android:text="Water gonna do?"
-                        android:fontFamily="serif-monospace" />
+                        android:textSize="20sp"
+                        android:text="Ready for some questions?"
+                        style="@style/text_h3" />
 
                 <Button
                         android:layout_width="match_parent"
@@ -154,17 +144,17 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_continue"
                         android:text="Continue"
-                        android:fontFamily="serif-monospace" />
+                        style="@style/button" />
 
-                <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/input_background_neutral"
-                        android:id="@+id/btn_question_list"
-                        android:text="Already solved"
-                        android:fontFamily="serif-monospace" />
-
+                <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/transparent_background"
+                        android:id="@+id/btn_reset_progress"
+                        android:textSize="20sp"
+                        android:text="Reset progress"
+                        style="@style/text_h3" />
             </LinearLayout>
 
 

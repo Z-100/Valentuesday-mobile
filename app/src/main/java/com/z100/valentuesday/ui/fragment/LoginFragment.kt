@@ -113,6 +113,7 @@ class LoginFragment : Fragment() {
                 dataManager!!.addAllQuestions(res)
                 findNavController().navigate(R.id.action_login_to_dashboard)
             } else {
+                Logger.log("No questions found", this.javaClass)
                 view?.let { Snackbar.make(it, "No questions found!", 2).show() }
             }
         }

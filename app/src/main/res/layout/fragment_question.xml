@@ -44,21 +44,25 @@
                         android:orientation="horizontal"
                         tools:ignore="UselessLeaf">
 
-                    <TextView android:layout_weight="4"
+                    <TextView
+                            android:layout_weight="4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/tv_title"
                             android:gravity="top"
-                            android:textSize="30sp"
-                            android:text="@string/valentuesday_title" />
+                            android:textSize="45sp"
+                            android:text="@string/valentuesday_title"
+                            style="@style/text_h2" />
 
-                    <Button android:layout_weight="1"
+                    <Button
+                            android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/input_background_neutral"
-                            android:id="@+id/btn_go_back"
+                            android:id="@+id/btnGoBack"
                             android:textSize="10sp"
-                            android:text="Go back" />
+                            android:text="Go back"
+                            style="@style/button" />
                 </LinearLayout>
 
                 <!-- Filler -->
@@ -76,8 +80,9 @@
                         android:background="@drawable/input_background_neutral"
                         android:padding="15dp"
                         android:gravity="top"
-                        android:textSize="20sp"
+                        android:textSize="30sp"
                         android:maxLength="140"
+                        style="@style/text_h2"
                         android:text="" />
             </LinearLayout>
 
@@ -123,8 +128,8 @@
                     android:orientation="vertical">
 
                 <TextView android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:textSize="@dimen/text_size_field_desc"
+                        android:layout_height="50dp"
+                        style="@style/text_h2"
                         android:text="Answer the question" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -133,7 +138,10 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_one"
+                        android:textColor="@color/purple_0"
                         android:maxLength="32"
+                        android:textSize="25sp"
+                        style="@style/text_h2"
                         android:text="" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -143,6 +151,8 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_two"
                         android:maxLength="32"
+                        android:textSize="25sp"
+                        style="@style/text_h2"
                         android:text="" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -152,6 +162,8 @@
                         android:background="@drawable/input_background_neutral"
                         android:id="@+id/btn_answer_three"
                         android:maxLength="32"
+                        android:textSize="25sp"
+                        style="@style/text_h2"
                         android:text="" />
             </LinearLayout>
 

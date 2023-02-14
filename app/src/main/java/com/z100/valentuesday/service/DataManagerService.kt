@@ -75,22 +75,21 @@ class DataManagerService(private val sp: SharedPreferences) {
     fun getAllQuestions(): List<Question>? {
         val json = sp.getString(SP_ALL_QUESTIONS, null) ?: return null
 
-        return Gson().fromJson(json, List::class.java) as List<Question>
+        val type = TypeToken.getParameterized(List::class.java, Question::class.java).type
+
+        return Gson().fromJson(json, type)
     }
 
-    fun getSpecificQuestion(id: Long): Question? {
+    fun getSpecificQuestion(id: Int): Question? {
         val json = sp.getString(SP_ALL_QUESTIONS, null) ?: return null
 
         Logger.log("#getSpecificQuestion: $json", this.javaClass)
 
-        val questions = Gson().fromJson(json, TypeToken<List<Question>>() {}.type)
+        val type = TypeToken.getParameterized(List::class.java, Question::class.java).type
 
-        for (question in questions) {
-            if ((question as Question).id == id) {
-                return question
-            }
-        }
-        return null
+        val questions: List<Question> = Gson().fromJson(json, type)
+
+        return questions[id]
     }
 
     fun allQuestionsExists(): Boolean {
